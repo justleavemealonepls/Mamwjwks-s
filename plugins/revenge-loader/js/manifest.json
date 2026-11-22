@@ -1,7 +1,0 @@
-{
-  "name": "Revenge Loader",
-  "description": "Revenge plugin compatibility loader",
-  "authors": ["You"],
-  "version": "1.0.0",
-  "main": "js/index.ts"
-}
