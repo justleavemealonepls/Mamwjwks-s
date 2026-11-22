@@ -1,0 +1,31 @@
+name: Build Plugins
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 25
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build plugins
+        run: ./gradlew --no-daemon packageAllPlugins
+        env:
+          GITHUB_TOKEN: ${{ secrets.READ_PACKAGES_TOKEN }}
