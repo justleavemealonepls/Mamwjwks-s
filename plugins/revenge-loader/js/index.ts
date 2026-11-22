@@ -1,23 +1,35 @@
-const g = globalThis as any
+const replacements: [string, string][] = [
+	["@revenge-mod/patcher", "@valenced/patcher"],
+	["@revenge-mod/modules", "@valenced/modules"],
+	["@revenge-mod/types", "@valenced/types"],
+	["@revenge-mod/themes-api", "@valenced/themes-api"],
+	["@revenge-mod/plugin-cli", "@valenced/plugin-cli"],
+	["revenge.api.hidden", "valenced.api.hidden"],
+	["revenge.api.themes", "valenced.api.themes"],
+	["revenge.api", "valenced.api"],
+	["globalThis.revenge", "globalThis.valenced"],
+	["revenge.hidden", "valenced.hidden"],
+	["revenge.", "valenced."],
+]
+
+function convert(source: string): string {
+	let result = source
+
+	for (const [oldName, newName] of replacements) {
+		result = result.replaceAll(oldName, newName)
+	}
+
+	return result
+}
 
 export default plugin({
 	start() {
-		if (!g.valenced) {
-			console.error("[RevengeLoader] Valenced API unavailable")
-			return
-		}
-
-		g.revenge ??= g.valenced
-
-		console.log("[RevengeLoader] Compatibility alias initialized")
-		console.log("[RevengeLoader] revenge → valenced")
+		;(globalThis as any).revengeConverter = convert
+		console.log("[Revenge Converter] Loaded")
 	},
 
 	stop() {
-		if (g.revenge === g.valenced) {
-			delete g.revenge
-		}
-
-		console.log("[RevengeLoader] Stopped")
+		delete (globalThis as any).revengeConverter
+		console.log("[Revenge Converter] Stopped")
 	},
 })
