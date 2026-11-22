@@ -1,0 +1,7 @@
+{
+  "name": "Revenge Loader",
+  "description": "Revenge plugin compatibility loader",
+  "authors": ["Abnoxious"],
+  "version": "1.0.0",
+  "main": "js/index.ts"
+}
