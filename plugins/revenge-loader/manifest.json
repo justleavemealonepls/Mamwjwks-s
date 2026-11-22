@@ -1,8 +1,9 @@
+
 {
   "format": 1,
-  "id": "revenge-loader",
-  "name": "Revenge Loader",
-  "description": "Revenge compatibility loader",
+  "id": "com.example.revenge-loader",
+  "name": "JumpToTop Valenced Port",
+  "description": "Jump to the top of Discord channels",
   "author": "You",
   "version": "1.0.0",
   "dependencies": {
